@@ -27,30 +27,32 @@
   --shadow: rgba(0,0,0,0.4);
   --overlay: rgba(0,0,0,0.92);
   --toast-bg: #1a1a2e;
+  --card-polaroid: #ffffff;
   --search-result: rgba(255,255,255,0.7);
 }
 
 [data-theme="light"] {
-  --bg-app: #f5f5f7;
-  --bg-header: rgba(245,245,247,0.92);
-  --bg-card: #ffffff;
+  --bg-app: #ffffff;
+  --bg-header: rgba(255,255,255,0.92);
+  --bg-card: #f0f0f5;
   --bg-input: #e8e8ed;
-  --bg-hover: rgba(0,0,0,0.05);
+  --bg-hover: #e4e4ea;
   --text-primary: #1d1d1f;
-  --text-secondary: #6e6e73;
-  --text-muted: #a1a1a6;
+  --text-secondary: #4a4a50;
+  --text-muted: #86868b;
   --text-placeholder: #a1a1a6;
   --border: #d2d2d7;
-  --border-strong: #c7c7cc;
+  --border-strong: #b8b8be;
   --accent: #FFE600;
   --accent-hover: #f5dc00;
   --accent-shadow: rgba(255,230,0,0.3);
   --scrollbar-track: #e8e8ed;
   --scrollbar-thumb: rgba(200,180,0,0.4);
   --scrollbar-hover: rgba(200,180,0,0.6);
-  --shadow: rgba(0,0,0,0.1);
+  --shadow: rgba(0,0,0,0.12);
   --overlay: rgba(0,0,0,0.6);
-  --toast-bg: #ffffff;
+  --toast-bg: #f0f0f5;
+  --card-polaroid: #f5f5f8;
   --search-result: #1d1d1f;
 }
 
@@ -151,7 +153,7 @@ body {
 }
 
 [data-theme="light"] select option {
-  background: #ffffff;
+  background: #f0f0f5;
   color: #1d1d1f;
 }
 

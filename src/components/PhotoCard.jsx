@@ -41,7 +41,8 @@ export default function PhotoCard({ photo, index, onRefresh, onOpen }) {
   return (
     <div
       onClick={() => { if (!editing && !editingMember && !confirmDelete && onOpen) onOpen(); }}
-      className="photo-card group relative bg-white rounded-xl shadow-lg cursor-pointer"
+      className="photo-card group relative rounded-xl shadow-lg cursor-pointer"
+      style={{ background: 'var(--card-polaroid)', border: '1px solid var(--border)' }}
       style={{ transform: `rotate(${rotation}deg)`, transition: 'transform 0.2s ease, box-shadow 0.2s ease' }}
       onMouseEnter={(e) => { e.currentTarget.style.transform = 'rotate(0deg) scale(1.04)'; e.currentTarget.style.boxShadow = '0 20px 40px var(--shadow)'; }}
       onMouseLeave={(e) => { e.currentTarget.style.transform = `rotate(${rotation}deg)`; e.currentTarget.style.boxShadow = ''; }}
@@ -67,7 +68,7 @@ export default function PhotoCard({ photo, index, onRefresh, onOpen }) {
       </div>
 
       {/* Polaroid bottom */}
-      <div className="bg-white px-3 py-2 overflow-hidden rounded-b-xl">
+      <div className="px-3 py-2 overflow-hidden rounded-b-xl" style={{ background: 'var(--card-polaroid)' }}>
         {editing ? (
           <div className="flex gap-1 w-full" onClick={(e) => e.stopPropagation()}>
             <input
@@ -75,7 +76,8 @@ export default function PhotoCard({ photo, index, onRefresh, onOpen }) {
               value={caption}
               onChange={(e) => setCaption(e.target.value)}
               onKeyDown={(e) => { if (e.key === 'Enter') saveCaption(); if (e.key === 'Escape') setEditing(false); }}
-              className="min-w-0 flex-1 text-xs text-black border border-gray-300 rounded px-1 py-0.5 outline-none"
+              className="min-w-0 flex-1 text-xs rounded px-1 py-0.5 outline-none"
+              style={{ color: 'var(--text-primary)', border: '1px solid var(--border-strong)', background: 'var(--bg-input)' }}
               placeholder={t.photoCard.captionPlaceholder}
             />
             <button onClick={saveCaption} className="shrink-0 text-green-600 text-xs font-bold w-5 text-center">✓</button>
@@ -88,7 +90,8 @@ export default function PhotoCard({ photo, index, onRefresh, onOpen }) {
               value={memberName}
               onChange={(e) => setMemberName(e.target.value)}
               onKeyDown={(e) => { if (e.key === 'Enter') saveMember(); if (e.key === 'Escape') setEditingMember(false); }}
-              className="min-w-0 flex-1 text-xs text-black border border-yellow-400 rounded px-1 py-0.5 outline-none"
+              className="min-w-0 flex-1 text-xs rounded px-1 py-0.5 outline-none"
+              style={{ color: 'var(--text-primary)', border: '1px solid #FFE600', background: 'var(--bg-input)' }}
               placeholder={t.welcome.namePlaceholder}
             />
             <button onClick={saveMember} className="shrink-0 text-green-600 text-xs font-bold w-5 text-center">✓</button>
@@ -97,9 +100,10 @@ export default function PhotoCard({ photo, index, onRefresh, onOpen }) {
         ) : (
           <p
             onClick={() => setEditing(true)}
-            className="text-xs text-gray-500 truncate min-h-[16px] cursor-text hover:text-gray-800 transition-colors"
+            className="text-xs truncate min-h-[16px] cursor-text transition-colors"
+            style={{ color: 'var(--text-secondary)' }}
           >
-            {photo.caption || <span className="text-gray-300 italic">{t.photoCard.captionPlaceholder}</span>}
+            {photo.caption || <span style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>{t.photoCard.captionPlaceholder}</span>}
           </p>
         )}
       </div>
