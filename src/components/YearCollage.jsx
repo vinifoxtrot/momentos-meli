@@ -66,27 +66,28 @@ export default function YearCollage({ photos }) {
       <Confetti active={showConfetti} />
 
       <div className="mb-8">
-        <h1 className="text-3xl font-black text-white mb-1">{t.yearCollage.title}</h1>
-        <p className="text-white/40">{t.yearCollage.subtitle}</p>
+        <h1 className="text-3xl font-black mb-1" style={{ color: 'var(--text-primary)' }}>{t.yearCollage.title}</h1>
+        <p style={{ color: 'var(--text-muted)' }}>{t.yearCollage.subtitle}</p>
       </div>
 
       {yearGroups.length === 0 ? (
         <div className="text-center py-20">
           <p className="text-5xl mb-4">📭</p>
-          <p className="text-white/50">{t.yearCollage.empty}</p>
+          <p style={{ color: 'var(--text-secondary)' }}>{t.yearCollage.empty}</p>
         </div>
       ) : (
         <>
           {/* Selector */}
-          <div className="bg-white/5 border border-white/10 rounded-2xl p-6 mb-8 flex flex-wrap gap-4 items-end">
+          <div className="rounded-2xl p-6 mb-8 flex flex-wrap gap-4 items-end" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
             <div className="flex flex-col gap-1.5">
-              <label htmlFor="yc-year" className="text-white/50 text-xs uppercase tracking-wider font-semibold">{t.yearCollage.yearLabel}</label>
+              <label htmlFor="yc-year" className="text-xs uppercase tracking-wider font-semibold" style={{ color: 'var(--text-muted)' }}>{t.yearCollage.yearLabel}</label>
               <div className="relative">
                 <select
                   id="yc-year"
                   value={selectedYear}
                   onChange={(e) => { setSelectedYear(e.target.value); setPlaying(false); setRevealedMonths(0); }}
-                  className="appearance-none bg-white/10 border border-white/20 rounded-xl pl-4 pr-10 py-2.5 text-white text-sm outline-none focus:border-[#FFE600]/60 min-w-[140px] w-full cursor-pointer"
+                  className="appearance-none rounded-xl pl-4 pr-10 py-2.5 text-sm outline-none min-w-[140px] w-full cursor-pointer"
+                  style={{ background: 'var(--bg-input)', border: '1px solid var(--border-strong)', color: 'var(--text-primary)' }}
                 >
                   <option value="">{t.yearCollage.select}</option>
                   {yearGroups.map((g) => (
@@ -95,7 +96,7 @@ export default function YearCollage({ photos }) {
                     </option>
                   ))}
                 </select>
-                <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-white/50 text-xs">▾</span>
+                <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-xs" style={{ color: 'var(--text-muted)' }}>▾</span>
               </div>
             </div>
 
@@ -111,7 +112,8 @@ export default function YearCollage({ photos }) {
               <button
                 onClick={downloadPng}
                 disabled={downloading}
-                className="bg-white/10 hover:bg-white/20 text-white font-semibold text-sm px-5 py-[9px] rounded-xl transition-all duration-200 flex items-center gap-2"
+                className="font-semibold text-sm px-5 py-[9px] rounded-xl transition-all duration-200 flex items-center gap-2"
+                style={{ background: 'var(--bg-hover)', color: 'var(--text-primary)' }}
               >
                 {downloading ? '⏳' : '⬇️'} {t.yearCollage.download}
               </button>
@@ -227,12 +229,12 @@ export default function YearCollage({ photos }) {
 
           {/* Placeholder */}
           {!playing && yearData && (
-            <div className="text-center py-16 border border-dashed border-white/20 rounded-3xl">
+            <div className="text-center py-16 border border-dashed rounded-3xl" style={{ borderColor: 'var(--border-strong)' }}>
               <p className="text-5xl mb-3">🎬</p>
-              <p className="text-white/50">
+              <p style={{ color: 'var(--text-secondary)' }}>
                 {t.yearCollage.readyPhotos(yearData.photos.length, selectedYear)}
               </p>
-              <p className="text-white/30 text-sm mt-1">{t.yearCollage.readyHint}</p>
+              <p className="text-sm mt-1" style={{ color: 'var(--text-muted)' }}>{t.yearCollage.readyHint}</p>
             </div>
           )}
         </>

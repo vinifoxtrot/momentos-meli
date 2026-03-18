@@ -77,29 +77,29 @@ export default function Gallery({ photos, onRefresh }) {
       {photos.length > 0 && (
         <div className="flex items-center justify-between gap-4 flex-wrap">
           <div className="flex gap-3">
-            <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-2xl px-4 py-3">
+            <div className="flex items-center gap-3 rounded-2xl px-4 py-3" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
               <span className="text-xl">📷</span>
               <div>
-                <p className="text-2xl font-black text-[#FFE600] leading-none">{countMoments}</p>
-                <p className="text-white/40 text-xs uppercase tracking-wider mt-0.5">{t.gallery.momentsLabel}</p>
+                <p className="text-2xl font-black leading-none" style={{ color: 'var(--accent)' }}>{countMoments}</p>
+                <p className="text-xs uppercase tracking-wider mt-0.5" style={{ color: 'var(--text-muted)' }}>{t.gallery.momentsLabel}</p>
               </div>
             </div>
-            <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-2xl px-4 py-3">
+            <div className="flex items-center gap-3 rounded-2xl px-4 py-3" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
               <span className="text-xl">📅</span>
               <div>
-                <p className="text-2xl font-black text-[#FFE600] leading-none">{countMonths}</p>
-                <p className="text-white/40 text-xs uppercase tracking-wider mt-0.5">{t.gallery.monthsLabel}</p>
+                <p className="text-2xl font-black leading-none" style={{ color: 'var(--accent)' }}>{countMonths}</p>
+                <p className="text-xs uppercase tracking-wider mt-0.5" style={{ color: 'var(--text-muted)' }}>{t.gallery.monthsLabel}</p>
               </div>
             </div>
           </div>
           <div className="flex items-center gap-3">
             {search && (
-              <p className="text-white/40 text-sm">
+              <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
                 {t.gallery.results(totalFiltered)}
               </p>
             )}
             <div className="relative">
-              <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30 pointer-events-none" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none" style={{ color: 'var(--text-placeholder)' }} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" strokeLinecap="round" />
               </svg>
               <input
@@ -107,10 +107,15 @@ export default function Gallery({ photos, onRefresh }) {
                 placeholder={t.gallery.searchPlaceholder}
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="bg-white/10 border border-white/20 rounded-xl pl-9 pr-4 py-2 text-sm text-white placeholder-white/30 outline-none focus:border-[#FFE600]/60 w-72"
+                className="rounded-xl pl-9 pr-4 py-2 text-sm outline-none w-72"
+                style={{
+                  background: 'var(--bg-input)',
+                  border: '1px solid var(--border-strong)',
+                  color: 'var(--text-primary)',
+                }}
               />
               {search && (
-                <button onClick={() => setSearch('')} aria-label={t.gallery.scrollTop} className="absolute right-3 top-1/2 -translate-y-1/2 text-white/30 hover:text-white/70 text-xs">✕</button>
+                <button onClick={() => setSearch('')} aria-label={t.gallery.scrollTop} className="absolute right-3 top-1/2 -translate-y-1/2 text-xs" style={{ color: 'var(--text-muted)' }}>✕</button>
               )}
             </div>
           </div>
@@ -120,21 +125,19 @@ export default function Gallery({ photos, onRefresh }) {
       {photos.length === 0 && (
         <div className="text-center py-20 space-y-4">
           <p className="text-6xl">📷</p>
-          <p className="text-white/50 text-lg">{t.gallery.empty}</p>
-          <p className="text-white/30 text-sm">{t.gallery.emptyHint}</p>
+          <p className="text-lg" style={{ color: 'var(--text-secondary)' }}>{t.gallery.empty}</p>
+          <p className="text-sm" style={{ color: 'var(--text-muted)' }}>{t.gallery.emptyHint}</p>
         </div>
       )}
 
       {search && filtered.length === 0 && photos.length > 0 && (
         <div className="text-center py-16 space-y-3">
           <p className="text-5xl">🔍</p>
-          <p className="text-white/50">{t.gallery.noResults(search)}</p>
+          <p style={{ color: 'var(--text-secondary)' }}>{t.gallery.noResults(search)}</p>
         </div>
       )}
 
-      {filtered.map((group) => {
-        const flatPhotos = filtered.flatMap((g) => g.photos);
-        return (
+      {filtered.map((group) => (
         <motion.section
           key={`${group.year}-${group.month}`}
           initial={{ opacity: 0, y: 16 }}
@@ -145,7 +148,7 @@ export default function Gallery({ photos, onRefresh }) {
               className="w-1 h-7 rounded-full shrink-0"
               style={{ background: SECTION_COLORS[(group.month - 1) % 12] }}
             />
-            <h2 className="text-xl font-black text-white">
+            <h2 className="text-xl font-black" style={{ color: 'var(--text-primary)' }}>
               {t.months[group.month - 1]} {group.year}
             </h2>
             <span
@@ -158,7 +161,7 @@ export default function Gallery({ photos, onRefresh }) {
             >
               {t.gallery.photoCount(group.photos.length)}
             </span>
-            <div className="flex-1 h-px bg-white/10" />
+            <div className="flex-1 h-px" style={{ background: 'var(--border)' }} />
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
@@ -177,8 +180,8 @@ export default function Gallery({ photos, onRefresh }) {
             ))}
           </div>
         </motion.section>
-        );
-      })}
+      ))}
+
       {/* Scroll to top FAB */}
       <AnimatePresence>
         {showScrollTop && (
@@ -188,7 +191,8 @@ export default function Gallery({ photos, onRefresh }) {
             exit={{ opacity: 0, scale: 0.7 }}
             transition={{ type: 'spring', stiffness: 300, damping: 20 }}
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="fixed bottom-6 right-6 z-50 w-11 h-11 bg-[#FFE600] hover:bg-yellow-300 text-black font-black rounded-full flex items-center justify-center shadow-lg shadow-yellow-500/30 transition-colors"
+            className="fixed bottom-6 right-6 z-50 w-11 h-11 bg-[#FFE600] hover:bg-yellow-300 text-black font-black rounded-full flex items-center justify-center shadow-lg transition-colors"
+            style={{ boxShadow: '0 4px 14px var(--accent-shadow)' }}
             aria-label={t.gallery.scrollTop}
             title={t.gallery.scrollTop}
           >

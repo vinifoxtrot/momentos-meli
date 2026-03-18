@@ -43,7 +43,7 @@ export default function PhotoCard({ photo, index, onRefresh, onOpen }) {
       onClick={() => { if (!editing && !editingMember && !confirmDelete && onOpen) onOpen(); }}
       className="photo-card group relative bg-white rounded-xl shadow-lg cursor-pointer"
       style={{ transform: `rotate(${rotation}deg)`, transition: 'transform 0.2s ease, box-shadow 0.2s ease' }}
-      onMouseEnter={(e) => { e.currentTarget.style.transform = 'rotate(0deg) scale(1.04)'; e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,0,0,0.5)'; }}
+      onMouseEnter={(e) => { e.currentTarget.style.transform = 'rotate(0deg) scale(1.04)'; e.currentTarget.style.boxShadow = '0 20px 40px var(--shadow)'; }}
       onMouseLeave={(e) => { e.currentTarget.style.transform = `rotate(${rotation}deg)`; e.currentTarget.style.boxShadow = ''; }}
     >
       {/* Tape strips */}

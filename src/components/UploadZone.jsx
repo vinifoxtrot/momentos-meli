@@ -50,7 +50,7 @@ export default function UploadZone({ onUploaded }) {
       {/* Month/year selector */}
       <div className="flex items-center gap-3 flex-wrap">
         <div className="flex flex-col gap-1">
-          <label htmlFor="upload-month" className="text-white/40 text-xs uppercase tracking-wider font-semibold">
+          <label htmlFor="upload-month" className="text-xs uppercase tracking-wider font-semibold" style={{ color: 'var(--text-muted)' }}>
             {t.upload.monthLabel}
           </label>
           <div className="relative">
@@ -58,18 +58,19 @@ export default function UploadZone({ onUploaded }) {
               id="upload-month"
               value={selectedMonth}
               onChange={(e) => setSelectedMonth(Number(e.target.value))}
-              className="appearance-none bg-white/10 border border-white/20 rounded-xl pl-4 pr-9 py-2 text-white text-sm outline-none focus:border-[#FFE600]/60 cursor-pointer"
+              className="appearance-none rounded-xl pl-4 pr-9 py-2 text-sm outline-none cursor-pointer"
+              style={{ background: 'var(--bg-input)', border: '1px solid var(--border-strong)', color: 'var(--text-primary)' }}
             >
               {t.months.map((name, i) => (
                 <option key={i + 1} value={i + 1}>{name}</option>
               ))}
             </select>
-            <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-white/50 text-xs">▾</span>
+            <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-xs" style={{ color: 'var(--text-muted)' }}>▾</span>
           </div>
         </div>
 
         <div className="flex flex-col gap-1">
-          <label htmlFor="upload-year" className="text-white/40 text-xs uppercase tracking-wider font-semibold">
+          <label htmlFor="upload-year" className="text-xs uppercase tracking-wider font-semibold" style={{ color: 'var(--text-muted)' }}>
             {t.upload.yearLabel}
           </label>
           <div className="relative">
@@ -77,19 +78,18 @@ export default function UploadZone({ onUploaded }) {
               id="upload-year"
               value={selectedYear}
               onChange={(e) => setSelectedYear(Number(e.target.value))}
-              className="appearance-none bg-white/10 border border-white/20 rounded-xl pl-4 pr-9 py-2 text-white text-sm outline-none focus:border-[#FFE600]/60 cursor-pointer"
+              className="appearance-none rounded-xl pl-4 pr-9 py-2 text-sm outline-none cursor-pointer"
+              style={{ background: 'var(--bg-input)', border: '1px solid var(--border-strong)', color: 'var(--text-primary)' }}
             >
               {years.map((y) => <option key={y} value={y}>{y}</option>)}
             </select>
-            <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-white/50 text-xs">▾</span>
+            <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-xs" style={{ color: 'var(--text-muted)' }}>▾</span>
           </div>
         </div>
 
-        <div className="flex items-center gap-2 mt-4 text-white/30 text-sm">
+        <div className="flex items-center gap-2 mt-4 text-sm" style={{ color: 'var(--text-muted)' }}>
           <span>→</span>
-          <span>
-            {t.months[selectedMonth - 1]} {selectedYear}
-          </span>
+          <span>{t.months[selectedMonth - 1]} {selectedYear}</span>
         </div>
       </div>
 
@@ -99,16 +99,11 @@ export default function UploadZone({ onUploaded }) {
         onDragOver={(e) => { e.preventDefault(); setDragging(true); }}
         onDragLeave={() => setDragging(false)}
         onDrop={onDrop}
-        className={`
-          relative cursor-pointer rounded-2xl border-2 border-dashed p-10
-          flex flex-col items-center justify-center gap-3 transition-all duration-200
-          ${dragging
-            ? 'border-[#FFE600] bg-[#FFE600]/10 scale-[1.01]'
-            : 'border-white/20 hover:border-white/40 hover:bg-white/5'}
-        `}
-        style={dragging ? {} : {
-          background: 'radial-gradient(ellipse at 50% 0%, rgba(255,230,0,0.04) 0%, transparent 70%)',
-        }}
+        className="relative cursor-pointer rounded-2xl border-2 border-dashed p-10 flex flex-col items-center justify-center gap-3 transition-all duration-200"
+        style={dragging
+          ? { borderColor: 'var(--accent)', background: 'rgba(255,230,0,0.1)', transform: 'scale(1.01)' }
+          : { borderColor: 'var(--border-strong)', background: 'var(--bg-card)' }
+        }
       >
         <input
           ref={inputRef}
@@ -122,7 +117,7 @@ export default function UploadZone({ onUploaded }) {
         {uploading ? (
           <>
             <div className="w-12 h-12 border-4 border-[#FFE600] border-t-transparent rounded-full animate-spin" />
-            <p className="text-white/60 font-medium">{t.upload.uploading}</p>
+            <p className="font-medium" style={{ color: 'var(--text-secondary)' }}>{t.upload.uploading}</p>
           </>
         ) : (
           <>
@@ -132,14 +127,14 @@ export default function UploadZone({ onUploaded }) {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
                 </svg>
               ) : (
-                <svg className="w-14 h-14 text-white/30" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+                <svg className="w-14 h-14" style={{ color: 'var(--text-muted)' }} fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.338-2.32 5.75 5.75 0 011.043 11.095H6.75z" />
                 </svg>
               )}
             </div>
             <div className="text-center">
-              <p className={`font-bold text-lg ${dragging ? 'text-[#FFE600]' : 'text-white'}`}>{t.upload.title}</p>
-              <p className="text-white/40 text-sm mt-1">{t.upload.subtitle}</p>
+              <p className="font-bold text-lg" style={{ color: dragging ? '#FFE600' : 'var(--text-primary)' }}>{t.upload.title}</p>
+              <p className="text-sm mt-1" style={{ color: 'var(--text-muted)' }}>{t.upload.subtitle}</p>
             </div>
           </>
         )}

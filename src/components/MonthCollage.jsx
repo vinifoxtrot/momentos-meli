@@ -106,44 +106,46 @@ export default function MonthCollage({ photos }) {
       )}
 
       <div className="mb-8">
-        <h1 className="text-3xl font-black text-white mb-1">{t.monthCollage.title}</h1>
-        <p className="text-white/40">{t.monthCollage.subtitle}</p>
+        <h1 className="text-3xl font-black mb-1" style={{ color: 'var(--text-primary)' }}>{t.monthCollage.title}</h1>
+        <p style={{ color: 'var(--text-muted)' }}>{t.monthCollage.subtitle}</p>
       </div>
 
       {groups.length === 0 ? (
         <div className="text-center py-20">
           <p className="text-5xl mb-4">📭</p>
-          <p className="text-white/50">{t.monthCollage.empty}</p>
+          <p style={{ color: 'var(--text-secondary)' }}>{t.monthCollage.empty}</p>
         </div>
       ) : (
         <>
           {/* ── Selector ── */}
-          <div className="bg-white/5 border border-white/10 rounded-2xl p-6 mb-8 flex flex-wrap gap-4 items-end">
+          <div className="rounded-2xl p-6 mb-8 flex flex-wrap gap-4 items-end" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
             <div className="flex flex-col gap-1.5">
-              <label htmlFor="mc-year" className="text-white/50 text-xs uppercase tracking-wider font-semibold">{t.monthCollage.yearLabel}</label>
+              <label htmlFor="mc-year" className="text-xs uppercase tracking-wider font-semibold" style={{ color: 'var(--text-muted)' }}>{t.monthCollage.yearLabel}</label>
               <div className="relative">
                 <select
                   id="mc-year"
                   value={selectedYear}
                   onChange={(e) => { setSelectedYear(e.target.value); setSelectedMonth(''); setStage('idle'); }}
-                  className="appearance-none bg-white/10 border border-white/20 rounded-xl pl-4 pr-10 py-2.5 text-white text-sm outline-none focus:border-[#FFE600]/60 min-w-[120px] w-full cursor-pointer"
+                  className="appearance-none rounded-xl pl-4 pr-10 py-2.5 text-sm outline-none min-w-[120px] w-full cursor-pointer"
+                  style={{ background: 'var(--bg-input)', border: '1px solid var(--border-strong)', color: 'var(--text-primary)' }}
                 >
                   <option value="">{t.monthCollage.select}</option>
                   {years.map((y) => <option key={y} value={y}>{y}</option>)}
                 </select>
-                <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-white/50 text-xs">▾</span>
+                <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-xs" style={{ color: 'var(--text-muted)' }}>▾</span>
               </div>
             </div>
 
             <div className="flex flex-col gap-1.5">
-              <label htmlFor="mc-month" className="text-white/50 text-xs uppercase tracking-wider font-semibold">{t.monthCollage.monthLabel}</label>
+              <label htmlFor="mc-month" className="text-xs uppercase tracking-wider font-semibold" style={{ color: 'var(--text-muted)' }}>{t.monthCollage.monthLabel}</label>
               <div className="relative">
                 <select
                   id="mc-month"
                   value={selectedMonth}
                   onChange={(e) => { setSelectedMonth(e.target.value); setStage('idle'); setVisibleCount(0); }}
                   disabled={!selectedYear}
-                  className="appearance-none bg-white/10 border border-white/20 rounded-xl pl-4 pr-10 py-2.5 text-white text-sm outline-none focus:border-[#FFE600]/60 min-w-[160px] w-full disabled:opacity-40 cursor-pointer disabled:cursor-not-allowed"
+                  className="appearance-none rounded-xl pl-4 pr-10 py-2.5 text-sm outline-none min-w-[160px] w-full disabled:opacity-40 cursor-pointer disabled:cursor-not-allowed"
+                  style={{ background: 'var(--bg-input)', border: '1px solid var(--border-strong)', color: 'var(--text-primary)' }}
                 >
                   <option value="">{t.monthCollage.select}</option>
                   {months.map((g) => (
@@ -153,7 +155,7 @@ export default function MonthCollage({ photos }) {
                     </option>
                   ))}
                 </select>
-                <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-white/50 text-xs">▾</span>
+                <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-xs" style={{ color: 'var(--text-muted)' }}>▾</span>
               </div>
             </div>
 
@@ -175,13 +177,15 @@ export default function MonthCollage({ photos }) {
                 <button
                   onClick={downloadPng}
                   disabled={downloading}
-                  className="bg-white/10 hover:bg-white/20 text-white font-semibold text-sm px-5 py-[9px] rounded-xl transition-all duration-200 flex items-center gap-2"
+                  className="font-semibold text-sm px-5 py-[9px] rounded-xl transition-all duration-200 flex items-center gap-2"
+                  style={{ background: 'var(--bg-hover)', color: 'var(--text-primary)' }}
                 >
                   {downloading ? '⏳' : '⬇️'} {t.monthCollage.download}
                 </button>
                 <button
                   onClick={() => { const n = !muted; setMuted(n); if (n) stopSong(); else playSong(Number(selectedMonth)); }}
-                  className="bg-white/10 hover:bg-white/20 text-white font-semibold text-sm px-4 py-[9px] rounded-xl transition-all duration-200"
+                  className="font-semibold text-sm px-4 py-[9px] rounded-xl transition-all duration-200"
+                  style={{ background: 'var(--bg-hover)', color: 'var(--text-primary)' }}
                 >
                   {muted ? '🔇' : '🔊'}
                 </button>
@@ -266,12 +270,12 @@ export default function MonthCollage({ photos }) {
 
           {/* Placeholder */}
           {stage === 'idle' && selected && (
-            <div className="text-center py-16 border border-dashed border-white/20 rounded-3xl">
+            <div className="text-center py-16 border border-dashed rounded-3xl" style={{ borderColor: 'var(--border-strong)' }}>
               <p className="text-5xl mb-3">🎬</p>
-              <p className="text-white/50">
+              <p style={{ color: 'var(--text-secondary)' }}>
                 {t.monthCollage.photoCount(collagePhotos.length, `${t.months[selected.month - 1]} ${selected.year}`)}
               </p>
-              <p className="text-white/30 text-sm mt-1">{t.monthCollage.readyHint}</p>
+              <p className="text-sm mt-1" style={{ color: 'var(--text-muted)' }}>{t.monthCollage.readyHint}</p>
             </div>
           )}
         </>

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { getAllPhotos } from './utils/db';
 import { LanguageProvider } from './context/LanguageContext';
+import { ThemeProvider } from './context/ThemeContext';
 import Header from './components/Header';
 import Gallery from './components/Gallery';
 import MonthCollage from './components/MonthCollage';
@@ -19,7 +20,7 @@ function AppInner() {
   useEffect(() => { loadPhotos(); }, []);
 
   return (
-    <div className="min-h-screen bg-[#0d0d1a]">
+    <div className="min-h-screen" style={{ background: 'var(--bg-app)', transition: 'background 0.3s ease' }}>
       <Header view={view} onNav={setView} />
       <main>
         <AnimatePresence mode="wait">
@@ -42,8 +43,10 @@ function AppInner() {
 
 export default function App() {
   return (
-    <LanguageProvider>
-      <AppInner />
-    </LanguageProvider>
+    <ThemeProvider>
+      <LanguageProvider>
+        <AppInner />
+      </LanguageProvider>
+    </ThemeProvider>
   );
 }

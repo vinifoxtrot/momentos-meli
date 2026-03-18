@@ -32,10 +32,10 @@ export default function Lightbox({ photos, index, onClose, onPrev, onNext }) {
         onClick={onClose}
       >
         {/* Backdrop */}
-        <div className="absolute inset-0 bg-black/92 backdrop-blur-sm" />
+        <div className="absolute inset-0 backdrop-blur-sm" style={{ background: 'var(--overlay)' }} />
 
         {/* Counter */}
-        <div className="absolute top-5 left-1/2 -translate-x-1/2 bg-white/10 text-white/70 text-xs font-semibold px-3 py-1 rounded-full z-10">
+        <div className="absolute top-5 left-1/2 -translate-x-1/2 text-white/70 text-xs font-semibold px-3 py-1 rounded-full z-10 bg-white/10">
           {index + 1} / {photos.length}
         </div>
 
